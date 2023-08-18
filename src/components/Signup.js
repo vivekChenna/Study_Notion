@@ -1,7 +1,16 @@
 import React from "react";
+import Template from "./Template";
 
-const Signup = () => {
-  return <div>this is the signup page</div>;
+const Signup = ({ setIsLoggedIn }) => {
+  return (
+    <Template
+      title="Join the millions learning to code with studyNotion for free"
+      desc1="Build Skills for today, tomorrow, and beyond."
+      desc2="Education to future-proof your career"
+      formType="signup"
+      setIsLoggedIn={setIsLoggedIn}
+    />
+  );
 };
 
 export default Signup;

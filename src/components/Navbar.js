@@ -1,34 +1,74 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assests/logo.png";
+import toast from "react-hot-toast";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
-    <div className=" border-2">
-      <div className="flex border-2">
-        <Link to="/">
-          <img src={logo} alt="logo" className=" w-12 h-12"  />
-          <p>Study Notion</p>
+    <div className=" border-2 flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto">
+      <div className="flex">
+        <Link to="/" className="flex gap-2">
+          <img
+            src={logo}
+            alt="logo"
+            className=" w-12 h-12 bg-white"
+            loading="lazy"
+          />
+          <p className=" text-5xl font-bold">StudyNotion</p>
         </Link>
       </div>
 
-      <nav>
-        <ul>
+      <nav className="">
+        <ul className="flex gap-9 flex-wrap">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className=" text-xl">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" className="text-xl">
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" className="text-xl">
+              Contact
+            </Link>
           </li>
         </ul>
       </nav>
 
-      <div>
-        <button className=" bg-slate-400">Signup</button>
-        <button>Login</button>
+      <div className="flex gap-6 flex-wrap">
+        {!isLoggedIn && (
+          <Link to="/login">
+            <button className="text-xl">Login</button>
+          </Link>
+        )}
+
+        {!isLoggedIn && (
+          <Link to="/signup">
+            <button className="text-xl">Signup</button>
+          </Link>
+        )}
+
+        {isLoggedIn && (
+          <Link to="/">
+            <button
+              onClick={() => {
+                setIsLoggedIn(false);
+                toast.success("logged out");
+              }}
+              className="text-xl"
+            >
+              Logout
+            </button>
+          </Link>
+        )}
+        {isLoggedIn && (
+          <Link to="/dashboard">
+            <button className="text-xl">Dashboard</button>
+          </Link>
+        )}
       </div>
     </div>
   );
